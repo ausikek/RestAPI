@@ -56,7 +56,7 @@ class UserController {
     }
   }
 
-  async list(req: Request, res: Response, next: NextFunction) {
+  async list(_: Request, res: Response, next: NextFunction) {
     try {
       const users = await UserRepository.list();
 
