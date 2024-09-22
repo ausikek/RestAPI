@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { hash } from "bcryptjs";
 import { UserRepository } from "../repositories";
-import { User, UserUpdate } from "../DTOs";
+import { UserUpdate, UserCreate } from "../DTOs";
 
 class UserController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = User.parse(req.body);
+      const user = UserCreate.parse(req.body);
       const userExists = await UserRepository.findByEmail(user.email);
 
       if (userExists) {
@@ -48,6 +48,21 @@ class UserController {
       res.locals = {
         status: 200,
         data: user,
+      };
+
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  async list(req: Request, res: Response, next: NextFunction) {
+    try {
+      const users = await UserRepository.list();
+
+      res.locals = {
+        status: 200,
+        data: users,
       };
 
       return next();

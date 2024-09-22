@@ -5,6 +5,8 @@ const userRouter = Router();
 
 userRouter.route("/").post(UserController.create);
 
+userRouter.route("/").get(UserController.list);
+
 userRouter.route("/:userId").get(UserController.read);
 
 userRouter.route("/:userId").patch(UserController.update);
