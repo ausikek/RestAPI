@@ -13,4 +13,6 @@ userRouter.route("/:userId").patch(UserController.update);
 
 userRouter.route("/:userId").delete(UserController.delete);
 
+userRouter.route("/:email").get(UserController.findEmail);
+
 export default userRouter;

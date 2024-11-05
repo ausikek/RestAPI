@@ -106,6 +106,30 @@ class UserController {
       return next(error);
     }
   }
+
+  async findEmail(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email } = req.params;
+
+      const user = await UserRepository.findByEmail(email);
+
+      if (!user) {
+        return next({
+          status: 404,
+          message: "User not found",
+        });
+      }
+
+      res.locals = {
+        status: 200,
+        data: user,
+      };
+
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 export default new UserController();

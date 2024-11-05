@@ -9,7 +9,7 @@ const app: Express = express();
 
 app.use(helmet());
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3001" }));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(routes);
